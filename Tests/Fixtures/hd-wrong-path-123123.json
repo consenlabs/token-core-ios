@@ -1,0 +1,33 @@
+{
+  "version" : 3,
+  "ksData" : {
+    "m/44'/60'/0'" : {
+      "encHdPathPriv" : {
+        "encStr" : "f57520847f57",
+        "nonce" : "753ea77e2d0c59f368695ec614143c49"
+      },
+      "info" : {
+        "purpose" : "sign",
+        "curve" : "secp256k1"
+      },
+      "encPrivKeys" : {
+        "cd64a14e419f12570566c0c118f04a2691351972" : {
+          "key" : "058f7da3d9317123089ce55ffbabe451c7f5ff2493c0feb9e419065c2a33b07b",
+          "nonce" : "a428aeb4e8f0e79448e32935b0406866"
+        }
+      },
+      "hdIndex" : 1,
+      "addresses" : [
+        "cd64a14e419f12570566c0c118f04a2691351972"
+      ]
+    }
+  },
+  "encHdRootPriv" : {
+    "encStr" : "d0797384e6697306e7c2a082f76bda466367ce8ea7d57e51da4e88fb9a4aec60838db02a0f18c08b533db5aed47bc1650d7d65fc1d7cdb9b",
+    "nonce" : "b490d3c550f0dbcc912d91e970821b92"
+  },
+  "encSeed" : {
+    "encStr" : "5e687735f0c036fdf40b6168e4b0dd4a737f05b6148ed5dbf75e11e6e8e86db20b65499f82c4af2193315b2b7d8127b5775f0d50eabbd46796baa585b0a200bd206644c11fe13a6e5987ce3798e05088",
+    "nonce" : "c6d6610710cdf3da54e174a1a940d3de"
+  }
+}

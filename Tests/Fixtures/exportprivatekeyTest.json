@@ -1,0 +1,22 @@
+{
+    "testExportSuccess" : {
+        "address" : "0xa495f9b9bdef68d1d2f61673c9d59b954243fbcd",
+        "password" : "testpassword",
+        "walletID" : "v3-scrypt-testpassword"
+    },
+    "testExportFailWithIncorrectPassword" : {
+        "address" : "0xa495f9b9bdef68d1d2f61673c9d59b954243fbcd",
+        "password" : "badpassword",
+        "walletID" : "v3-scrypt-testpassword"
+    },
+    "testWalletNotFound" : {
+        "address" : "address",
+        "password" : "123123123",
+        "walletID" : "walletID"
+    },
+    "testPasswordEmpty" : {
+        "address" : "address",
+        "password" :"",
+        "walletID" :"walletID"
+    }
+}

@@ -1,0 +1,20 @@
+disabled_rules:
+  - identifier_name
+  - force_cast
+  - force_try
+
+excluded:
+  - Pods
+  - Sources/Vendor
+  - Tests
+  - Example
+
+line_length: 180
+
+function_parameter_count: 10
+
+type_body_length:
+  - 400 # warning
+  - 600 # error
+
+

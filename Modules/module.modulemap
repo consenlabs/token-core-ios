@@ -1,0 +1,24 @@
+module libscrypt [system][extern_c] {
+  header "../Vendor/libscrypt/libscrypt.h"
+  export *
+}
+
+module libsecp256k1 [system][extern_c] {
+  header "../Vendor/secp256k1/secp256k1.framework/Headers/secp256k1.h"
+  header "../Vendor/secp256k1/secp256k1.framework/Headers/secp256k1_recovery.h"
+  export *
+}
+
+/// On macOS 10.14 and above, install /Library/Developer/CommandLineTools/Packages/macOS_SDK_headers_for_macOS_10.14.pkg
+/// to have /usr/include headers.
+module CCommonCrypto {
+  header "/usr/include/CommonCrypto/CommonCrypto.h"
+  export *
+}
+
+module CoreBitcoin [system] {
+  header "../Vendor/CoreBitcoin/CoreBitcoin.h"
+  header "../Vendor/CoreBitcoin/NSData+BTCData.h"
+  header "../Vendor/CoreBitcoin/NS+BTCBase58.h"
+  export *
+}

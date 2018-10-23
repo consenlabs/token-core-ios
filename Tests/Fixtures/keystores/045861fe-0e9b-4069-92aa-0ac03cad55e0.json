@@ -1,0 +1,30 @@
+{
+  "crypto": {
+    "cipher": "aes-128-ctr",
+    "cipherparams": {
+      "iv": "a322450a5d78b355d3f10d32424bdeb7"
+    },
+    "ciphertext": "7323633304b6e10fce17725b2f6ff8190b8e2f1c4fdb29904802e8eb9cb1ac6b",
+    "kdf": "pbkdf2",
+    "kdfparams": {
+      "c": 65535,
+      "dklen": 32,
+      "prf": "hmac-sha256",
+      "salt": "51bcbf8d464d96fca108a6bd7779381076a3f5a6ca5242eb12c8c219f1015767"
+    },
+    "mac": "cf81fa8f858554a21d00a376923138e727567f686f30f77fe3bba31b40a91c56"
+  },
+  "id": "045861fe-0e9b-4069-92aa-0ac03cad55e0",
+  "version": 3,
+  "address": "41983f2e3af196c1df429a3ff5cdecc45c82c600",
+  "imTokenMeta": {
+    "backup": [],
+    "chainType": "ETHEREUM",
+    "mode": "NORMAL",
+    "name": "ETH-Wallet-2",
+    "passwordHint": "",
+    "source": "KEYSTORE",
+    "timestamp": 1519611469,
+    "walletType": "V3"
+  }
+}

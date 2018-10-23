@@ -1,0 +1,55 @@
+{
+  "id": "5776d691-6a29-4111-81b1-9c3b053b9eaf",
+  "keyPathPrivates": [
+                      {
+                      "privateKey": {
+                      "encStr": "11b79c073136d4f5a31ebdeef01becdb4df2087ceb8482dff2877f5dd4ed3e79",
+                      "nonce": "df711a8a46728dde478a4ec97d1c8ac7"
+                      },
+                      "publicKey": "EOS6ATRYTiYK3pguimUuZJPu8UGXvHnhjD1qcEXCj3vbbq7SHRvpA"
+                      },
+                      {
+                      "privateKey": {
+                      "encStr": "a611558aa5cac9c3f57af6fd91e70b690294de8ca275583d12e3941e850a36af",
+                      "nonce": "10fb240bfbb819d826e697ba89f69d1c"
+                      },
+                      "publicKey": "EOS8EhtUqZ9WaNuJHsXmcUzD5nh9zp5ZqQpAg73KoNKMGnkwj9B8A"
+                      }
+                      ],
+  "mnemonicPath": "m/44'/194'",
+  "address": "longhairzlh3",
+  "version": 10001,
+  "crypto": {
+    "mac": "f8fbe312f7b07750c5522d72be5fc23b38c3e68839ddb160ecbf519e33e4ec06",
+    "cipherparams": {
+      "iv": "e5c66a6f4551141d43029a3643d72951"
+    },
+    "kdfparams": {
+      "dklen": 32,
+      "r": 8,
+      "salt": "9ca622bfc9aed03af485444c7f6bee148ac58266bc131994284f4469b35e4b85",
+      "p": 1,
+      "n": 262144
+    },
+    "cipher": "aes-128-ctr",
+    "ciphertext": "9d84b60244b410d9c3a02d2e2bf53a0d7b3d5d0704aa57c9f9d02b32f43cb603",
+    "kdf": "scrypt"
+  },
+  "imTokenMeta": {
+    "backup": [],
+    "name": "EOS",
+    "segWit": "NONE",
+    "source": "RECOVERED_IDENTITY",
+    "passwordHint": "",
+    "version": "iOS-2.0.10.305",
+    "mode": "normal",
+    "chainType": "EOS",
+    "timestamp": "1536922978",
+    "network": "MAINNET",
+    "walletType": "HD_SHA256"
+  },
+  "encMnemonic": {
+    "encStr": "bc9b2f7cd01e8706176bc64dc73f0694cedae2bf7ea2508290c1657a569c748e18e919c53fb8d1d57e32585ca8deccf68de1cf02f3fa7297f38232fc8f54d066e9371ed090049954b3a3688f1b37ebc4",
+    "nonce": "cf0dbc1027caec7436862304df65fc95"
+  }
+}

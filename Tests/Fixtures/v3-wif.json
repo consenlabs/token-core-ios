@@ -1,0 +1,32 @@
+{
+  "version": 3,
+  "id": "530791e0-9309-4839-a176-9a8eec451460",
+  "crypto": {
+    "mac": "a10b412993ec783e854cb339b1f4165a013d41267adb561ed9ab47c209dea3ab",
+    "cipherparams": {
+      "iv": "799f757ee52b7c95aa76967fa908676c"
+    },
+    "kdfparams": {
+      "dklen": 32,
+      "r": 8,
+      "salt": "e3fa7f40fecac7f6c61326dfb6aba4697c2daba9ecd41f017e996ae15aa18a51",
+      "p": 1,
+      "n": 1024
+    },
+    "cipher": "aes-128-ctr",
+    "ciphertext": "d5c053f4893fbbaa0d58cc87d5b82abdbac55599a46fe6eb8e355487e5c4799039a4a4ae7f365db3d573946f3acb51a2cfb2aafe",
+    "kdf": "scrypt"
+  },
+  "imTokenMeta": {
+    "backup": {},
+    "name": "",
+    "source": "WIF",
+    "passwordHint": "",
+    "version": "iOS-2.0.0.93",
+    "mode": "normal",
+    "chain": "BITCOIN",
+    "timestamp": "1519635708.27348",
+    "network": "MAINNET"
+  },
+  "address": "n2ZNV88uQbede7C5M5jzi6SyG4GVuPpng6"
+}

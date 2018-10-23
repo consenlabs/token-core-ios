@@ -1,0 +1,51 @@
+{
+  "crypto": {
+    "cipher": "aes-128-ctr",
+    "cipherparams": {
+      "iv": "dce8a7d8d80f7b0772d93d94ee0a88c2"
+    },
+    "ciphertext": "e00963172019129051f1abc699628a9ba929fcfa6bafbaeae95c2506dba74353",
+    "kdf": "pbkdf2",
+    "kdfparams": {
+      "c": 65535,
+      "dklen": 32,
+      "prf": "hmac-sha256",
+      "salt": "c2aa983c4dc4e8dee98584abf639a98bf5e9389d961ae23e764434c5b11e093c"
+    },
+    "mac": "aa29c325e8dddfbc7a9e614f78c52e95a2d94e4337f8d999da74397d837f3be0"
+  },
+  "id": "7f5406be-b5ee-4497-948c-877deab8c994",
+  "version": 10001,
+  "address": "longhairzlh2",
+  "encMnemonic": {
+    "encStr": "3a4e064bdd271f54e0b1b60cfbfd02a627acd9d22478b73d5fb53efd642c7c8a6fd6e63bf81d7a2d05487e3e316616249aa0978c93744baedd3a76dabbdfab297671d61d12130d883609a9f450623660a32e",
+    "nonce": "c20bed957c3abf241e3a9806db7314a4"
+  },
+  "mnemonicPath": "m/44'/194'",
+  "keyPathPrivates": [
+    {
+      "encPrivate": {
+        "encStr": "8657459f1ad4b7b8d2db4850b9072dab1da6d08cf248070068dc910df73c1dc5",
+        "nonce": "cb64438515ef2565b7d0d1a036297bbd"
+      },
+      "publicKey": "EOS8W4CoVEhTj6RHhazfw6wqtrHGk4kE4fYb2VzCexAk81SjPU1mL"
+    },
+    {
+      "encPrivate": {
+        "encStr": "a69a4614b1efa0bb9680d3ee28204bf86853511c58273cfb0829047e2da52d3f",
+        "nonce": "b1ce6665d381f7990222871452dceada"
+      },
+      "publicKey": "EOS6ES7TPo4UzNAvM3wrS1WxTpn3aZw8NDG6Vtb4xMvZZLDy9eJja"
+    }
+  ],
+  "imTokenMeta": {
+    "backup": [],
+    "chainType": "EOS",
+    "mode": "NORMAL",
+    "name": "EOS",
+    "passwordHint": "",
+    "source": "RECOVERED_IDENTITY",
+    "timestamp": 1530537386,
+    "walletType": "HD_SHA256"
+  }
+}

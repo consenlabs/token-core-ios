@@ -1,0 +1,31 @@
+{
+  "crypto": {
+    "cipher": "aes-128-ctr",
+    "cipherparams": {
+      "iv": "2cb9d4457b284e47877d08a5c9493b46"
+    },
+    "ciphertext": "17ff4858e697455f4966c6072473f3501534bc20deb339b58aeb8db0bd9fe91777148d0a909f679fb6e3a7a64609034afeb72a",
+    "kdf": "pbkdf2",
+    "kdfparams": {
+      "c": 10240,
+      "dklen": 32,
+      "prf": "hmac-sha256",
+      "salt": "37890eb305866aa07853d14e7666c2ed31e18efc1129f1c5a66b9cc93d03fd73"
+    },
+    "mac": "4906577f075ad714f328e7b33829fdccfa8cd22eab2c0a8bc4f577824188ed16"
+  },
+  "id": "42c275c6-957a-49e8-9eb3-43c21cbf583f",
+  "version": 3,
+  "address": "longhairzlh2",
+  "imTokenMeta": {
+    "backup": [],
+    "chain": "EOS",
+    "mode": "NORMAL",
+    "name": "EOS-Wallet-1",
+    "network": "MAINNET",
+    "passwordHint": "",
+    "source": "WIF",
+    "timestamp": 1535426384,
+    "walletType": "V3"
+  }
+}

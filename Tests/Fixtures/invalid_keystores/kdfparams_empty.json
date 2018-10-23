@@ -1,0 +1,15 @@
+{
+  "version": 3,
+  "id": "5896e547-edb6-47d1-b960-b793624198e5",
+  "address": "ca3b0795a42b46be755ce282924d17024c70fd88",
+  "Crypto": {
+    "ciphertext": "19a9dc09327a9b4114bf359924ff39093c0f3ebf0993e1c42821e5f1813cedbe",
+    "cipherparams": {
+      "iv": "691d7876d449e9f66ed3938e4a3635d7"
+    },
+    "cipher": "aes-128-ctr",
+    "kdf": "scrypt",
+    "mac": "e743fdf489e22eaa3c3f84f02f546d37d39ecabc1793ae45bc6b08c6104ff3a8"
+  },
+  "err": "keystore_invalid"
+}

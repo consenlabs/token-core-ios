@@ -1,0 +1,43 @@
+{
+  "crypto": {
+    "cipher": "aes-128-ctr",
+    "cipherparams": {
+      "iv": "76e228e45cc66228e1890dec1d211de6"
+    },
+    "ciphertext": "18ce44f304402417eb96f3468a4f49450cb4b6916c32522ae5173960db929f486ff373781f1fca4742ed853b6c2d7e6951533a68805ae7586befc7d830718a3d8e9074ea6cd5bb361a1b06cf3c2cf8b4d82755c6639816b3ec1727cdd0b5e45a144f5cf943177a30ee9ecee2a65314",
+    "kdf": "pbkdf2",
+    "kdfparams": {
+      "c": 65535,
+      "dklen": 32,
+      "prf": "hmac-sha256",
+      "salt": "519463106b45fcb3ffcb39b1b8805cdb3d789a908502ce5f3b976dbca780a2d0"
+    },
+    "mac": "359ea5fe92c0dce5ab03a31e354de1f33a9f7cb822f012d00da68bddc7b02c5d"
+  },
+  "id": "a1b92c23-5fcb-43a7-a8fe-07bb56acd033",
+  "version": 10000,
+  "encAuthKey": {
+    "encStr": "ba3afce29774e6225f6bd24df91fb911dc4583f8d999669912388ce461d49ac0",
+    "nonce": "b1ab60c19a5fc6568bef1eea30d38a98"
+  },
+  "encKey": "9513617c9b398edebfb46080a8f0cf6c",
+  "encMnemonic": {
+    "encStr": "01dfbda9bd529fda10233082e8bed9ea7b7acda60c7f676f9cc5a4cf7c6f65bd3426e5e3cfec27652d9e36f0f855dbd2f8f0693b79f82bece69cd291ec2979862a45b40e758f48336c41",
+    "nonce": "869c45b926817db6a842eec33acf846e"
+  },
+  "identifier": "im18MDKM8hcTykvMmhLnov9m2BaFqsdjoA7cwNg",
+  "ipfsId": "QmVoPZQnQjppqcD4gUh1KrfmjbWQCtXQpm2YrFG6Voquh2",
+  "walletIDs": [
+    "175169f7-5a35-4df7-93c1-1ff612168e71",
+    "02a55ab6-554a-4e78-bc26-6a7acced7e5e",
+    "045861fe-0e9b-4069-92aa-0ac03cad55e0"
+  ],
+  "imTokenMeta": {
+    "backup": [],
+    "network": "MAINNET",
+    "name": "identity_name",
+    "passwordHint": "",
+    "source": "RECOVERED_IDENTITY",
+    "timestamp": 1519611220
+  }
+}

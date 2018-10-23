@@ -1,0 +1,32 @@
+PODS:
+  - BigInt (3.0.0):
+    - SipHash (~> 1.2)
+  - CryptoSwift (0.9.0)
+  - GRKOpenSSLFramework (1.0.2.13)
+  - SipHash (1.2.0)
+  - SwiftLint (0.27.0)
+
+DEPENDENCIES:
+  - BigInt (= 3.0.0)
+  - CryptoSwift (= 0.9.0)
+  - GRKOpenSSLFramework
+  - SwiftLint
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - BigInt
+    - CryptoSwift
+    - GRKOpenSSLFramework
+    - SipHash
+    - SwiftLint
+
+SPEC CHECKSUMS:
+  BigInt: a7864bcecd2976bced91963baef90079dbdcca25
+  CryptoSwift: bca8c5b653dcc2d9734409242a070ff53bafac86
+  GRKOpenSSLFramework: aee21fe0d6ab76fefa4f2db599d11b9c3a53c43b
+  SipHash: c6e9e43e9c531b5bc6602545130c26194a6d31ce
+  SwiftLint: 3207c1faa2240bf8973b191820a116113cd11073
+
+PODFILE CHECKSUM: 41227a2ee6fb8190248bc37bcb307ac884181a14
+
+COCOAPODS: 1.5.3
