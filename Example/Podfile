@@ -4,5 +4,5 @@ target "Example" do
   use_frameworks!
 
 	#pod "TokenCore", :path => "../"
-  pod "TokenCore", git: "git@github.com:consenlabs/ios-token-core.git"
+  pod "TokenCore", git: "git@github.com:consenlabs/token-core-ios.git"
 end
