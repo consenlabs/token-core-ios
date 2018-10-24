@@ -1,10 +1,10 @@
 Pod::Spec.new do |s|
   s.name          = "TokenCore"
-  s.version       = "0.0.1"
-  s.summary       = "Ethereum Core Library for imToken"
+  s.version       = "v0.1"
+  s.summary       = "Blockchain Library for imToken"
 
   s.description   = <<-DESC
-  Ethereum Core Library powering imToken iOS app.
+  Token Core Library powering imToken iOS app.
   DESC
 
   s.homepage      = "https://token.im"
@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   s.author        = { "James Chen" => "james@ashchan.com" }
   s.platform      = :ios, "9.0"
 
-  s.source        = { :git => "https://github.com/consenlabs/ios-token-core.git", :tag => "#{s.version}" }
+  s.source        = { :git => "https://github.com/consenlabs/token-core-ios.git", :tag => "#{s.version}" }
   s.source_files  = "Sources/**/*.{h,m,swift}", "Vendor/**/*.{h,m,c}"
   s.swift_version = "4.0"
   s.vendored_frameworks = [
