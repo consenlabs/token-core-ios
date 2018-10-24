@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name          = "TokenCore"
-  s.version       = "v0.1"
+  s.version       = "0.1"
   s.summary       = "Blockchain Library for imToken"
 
   s.description   = <<-DESC
