@@ -1,12 +1,12 @@
 # TokenCore
 TokenCore is a blockchain library. TokenCore provides the relatively consistent API that allows you to manage your wallets and sign transactions in BTC, ETH and EOS chains simultaneously.
-In addition, TokenCore introduces the concept of 'identity', you can use the same mnemonic to manage wallets on the three chains.   
+In addition, TokenCore introduces the concept of 'identity', you can use the same mnemonic to manage wallets on the three chains.
 
 ## Installation
 To install TokenCore, use CocoaPods and add this to your Podfile:
 
 ```
-pod "TokenCore", :git => "git@github.com:consenlabs/token-core-ios.git", :branch => 'master'
+pod "TokenCore", git: "https://github.com/consenlabs/token-core-ios.git", branch: "master"
 ```
 ## Try the API
 ### Create new Identity and derive the eth, btc wallets
