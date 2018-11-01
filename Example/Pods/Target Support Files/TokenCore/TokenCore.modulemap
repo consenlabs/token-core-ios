@@ -1,0 +1,6 @@
+framework module TokenCore {
+  umbrella header "TokenCore-umbrella.h"
+
+  export *
+  module * { export * }
+}

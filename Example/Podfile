@@ -1,8 +1,11 @@
-platform :ios, "11.2"
+use_frameworks!
 
-target "Example" do
-  use_frameworks!
+target 'TokenCore_Example' do
+  pod 'TokenCore', :path => '../'
 
-	#pod "TokenCore", :path => "../"
-  pod "TokenCore", git: "git@github.com:consenlabs/ios-token-core.git"
+  target 'TokenCore_Tests' do
+    inherit! :search_paths
+
+    
+  end
 end
