@@ -61,6 +61,11 @@ let txHahs = signResult.txHash // This is txHash which you can use for locating 
 ## Troubleshooting
 For macOS 10.14 Mojave and Xcode 10, install `/Library/Developer/CommandLineTools/Packages/macOS_SDK_headers_for_macOS_10.14.pkg` since Xcode command line tools don't install to `/usr/include` anymore.
 
+## TODO
+[ ] Test on Objective-C
+[ ] upgrade the `BigInt` from 3.0 to 3.1
+
+
 ## Copyright and License
 
 ```
