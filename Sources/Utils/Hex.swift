@@ -126,4 +126,14 @@ public extension String {
   func tk_isHex() -> Bool {
     return Hex.isHex(self)
   }
+  
+  func tk_data() -> Data? {
+    var dataBytes: Data?
+    if self.tk_isHex() {
+      dataBytes = self.tk_dataFromHexString()
+    } else {
+      dataBytes = self.data(using: .utf8)
+    }
+    return dataBytes
+  }
 }

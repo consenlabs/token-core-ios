@@ -82,6 +82,18 @@
     return self;
 }
 
+- (id) initInfinity {
+  if (self = [self initEmpty]) {
+    if (!EC_POINT_copy(_point, EC_GROUP_get0_generator(_group))) {
+      return nil;
+    }
+    if (!EC_POINT_set_to_infinity(_group, _point)) {
+      return nil;
+    }
+  }
+  return self;
+}
+
 // Initializes point with its binary representation (corresponds to -data).
 - (id) initWithData:(NSData*)data {
     if (self = [self initEmpty]) {
@@ -110,6 +122,48 @@
         }
     }
     return self;
+}
+
+- (id) initWithHex:(NSString *)hex {
+  if (self = [self initEmpty]) {
+    
+//    BIGNUM* bn = BN_bin2bn(data.bytes, (int)data.length, NULL);
+//    if (!bn) {
+//      return nil;
+//    }
+    if (!EC_POINT_hex2point(_group, hex.cString, _point, _bnctx)) {
+//    if (!EC_POINT_bn2point(_group, bn, _point, _bnctx)) {
+//      if (bn) BN_clear_free(bn);
+      return nil;
+    }
+    
+    // Point is imported, only need to cleanup an intermediate BIGNUM structure.
+//    if (bn) BN_clear_free(bn);
+  }
+  return self;
+}
+
+- (id) initWithX:(BTCBigNumber*)x yBit:(NSInteger)yBit {
+  if (self = [self initEmpty]) {
+//    BTCBigNumber *y = [[BTCBigNumber alloc] initWithInt32: 0];
+    if (!EC_POINT_set_compressed_coordinates_GF2m(_group, _point, x.BIGNUM, yBit, _bnctx)) {
+      return nil;
+    }
+
+  }
+  return self;
+}
+
+// EC_POINT_mul calculates the value generator * n + q * m return the result
+- (id) initWithSumOfTwoMultiplies:(BTCBigNumber*)n m:(BTCBigNumber*)m {
+  
+  if (self = [self initEmpty]) {
+    if (!EC_POINT_mul(_group, _point, n.BIGNUM, _point, m.BIGNUM, _bnctx)) {
+      return nil;
+    }
+  }
+  
+  return self;
 }
 
 - (NSData*) data {
@@ -169,8 +223,19 @@
     return self;
 }
 
+
+
 - (BOOL) isInfinity {
     return 1 == EC_POINT_is_at_infinity(_group, _point);
+}
+
+- (instancetype) twice {
+  
+  if (!EC_POINT_dbl(_group, _point, _point, _bnctx)) {
+    return nil;
+  }
+  
+  return self;
 }
 
 - (BTCBigNumber*) x {
@@ -230,5 +295,41 @@
     return [NSString stringWithFormat:@"<BTCCurvePoint:0x%p %@>", self, BTCHexFromData(self.data)];
 }
 
+- (instancetype) multiplyTwo:(BTCBigNumber*)j x:(BTCCurvePoint*)x k:(BTCBigNumber*)k {
+  NSLog(@"j bitlength %d", BN_num_bits(j.BIGNUM));
+  NSLog(@"k bitlength %d", BN_num_bits(k.BIGNUM));
+  NSLog(@"k %@", k.decimalString);
+  NSInteger i = MAX(BN_num_bits(j.BIGNUM), BN_num_bits(k.BIGNUM)) - 1;
+  NSLog(@"i lenght: %ld", i);
+  BTCCurvePoint *R = [[BTCCurvePoint alloc] initInfinity];
+  BTCCurvePoint *both = [[[BTCCurvePoint alloc] initWithEC_POINT:self.EC_POINT] add:x];
+  NSInteger z = 0;
+  while (i >= 0) {
+    BOOL jBit = BN_is_bit_set(j.BIGNUM, i);
+    BOOL kBit = BN_is_bit_set(k.BIGNUM, i);
+    
+    R = [R twice];
+    if (z <= 10) {
+      NSLog(@"R Twice: (%@, %@)", [R.x stringInBase:10], [R.y stringInBase:10]);
+      z++;
+    }
+    
+    if (jBit) {
+      if (kBit) {
+        R = [R add:both];
+        NSLog(@"R = [R add:both];");
+      } else {
+        NSLog(@"self (%@, %@)", self.x.decimalString, self.y.decimalString);
+        R = [R add:self];
+        NSLog(@"R = [R add:self];");
+      }
+    } else if (kBit) {
+      R = [R add:x];
+      NSLog(@"R = [R add:x];");
+    }
+    --i;
+  }
+  return R;
+}
 
 @end

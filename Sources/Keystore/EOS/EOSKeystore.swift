@@ -90,6 +90,11 @@ struct EOSKeystore: Keystore, EncMnemonicKeystore {
   }
 
   func decryptPrivateKey(from publicKey: String, password: String) throws -> [UInt8] {
+    
+    guard verify(password: password) else {
+      throw PasswordError.incorrect
+    }
+    
     guard let keyPath = keyPathPrivates.first(where: { keyPathPrivate -> Bool in
       return publicKey == keyPathPrivate.publicKey
     }) else {

@@ -81,6 +81,7 @@
 
 // just for eos
 - (NSData*) eosCompactSignatureForHash:(NSData*)hash;
++ (instancetype) eosEcRecover:(NSData*)signature forHash:(NSData*)hash;
 
 // [RFC6979 implementation](https://tools.ietf.org/html/rfc6979).
 // Returns 32-byte `k` nonce generated deterministically from the `hash` and the private key.

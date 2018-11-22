@@ -22,4 +22,22 @@ class EOSKeyTests: TestCase {
     let eosKey = EOSKey(privateKey: privateKey)
     XCTAssertEqual(TestData.eosPublicKey, eosKey.publicKey)
   }
+  
+  func testEcSignTest() {
+    do {
+      let meta = WalletMeta(chain: .eos, source: .wif)
+      let eosWallet = try WalletManager.importFromPrivateKey(TestData.eosPrivateKey, encryptedBy: TestData.password, metadata: meta, accountName: "imtoken1")
+      let signedData = try WalletManager.eosEcSign(walletID: eosWallet.walletID, data: "imToken2017", publicKey: TestData.eosPublicKey, password: TestData.password)
+      XCTAssertEqual("SIG_K1_JuVsfsNmB3JgvsnxUcmuw5m27gH9xTGuU4yN9BMoRLeLVYhA4Bfypdm8DDg5cUTXSLArDLc3gtRFkFHMm3rmZyZxD5FE7k", signedData)
+      let rightPubKey = try WalletManager.eosEcRecover(data: "imToken2017", signature: signedData)
+      XCTAssertEqual(TestData.eosPublicKey, rightPubKey)
+      
+      let wrongPubKey = try WalletManager.eosEcRecover(data: "imToken2016", signature: signedData)
+      XCTAssertNotEqual(TestData.eosPublicKey, wrongPubKey)
+    } catch {
+      XCTFail(error.localizedDescription)
+    }
+
+  }
+
 }

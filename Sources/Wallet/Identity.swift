@@ -95,7 +95,11 @@ public extension Identity {
 extension Identity {
   func append(_ newKeystore: Keystore) throws -> BasicWallet {
     let wallet = BasicWallet(newKeystore)
-
+    
+    if findWalletByAddress(wallet.address.removePrefix0xIfNeeded(), on: newKeystore.meta.chain!) != nil {
+      throw AddressError.alreadyExist
+    }
+    
     keystore.wallets.append(wallet)
     keystore.walletIds.append(wallet.walletID)
     if Identity.storage.flushWallet(wallet.keystore) && Identity.storage.flushIdentity(keystore) {

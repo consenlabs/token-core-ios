@@ -95,6 +95,49 @@ extension Encryptor {
 
       return data.toHexString()
     }
+    
+    /// Recover public key from signature and message.
+    /// - Parameter signature: Signature.
+    /// - Parameter message: Raw message before signing.
+    /// - Parameter recid: recid.
+    /// - Returns: Recoverd public key.
+    func eosRecover(signature: Data, message: Data, recid: Int32) -> String? {
+//      guard let signBytes = signature.tk_dataFromHexString()?.bytes,
+//        let messageBytes = message.tk_dataFromHexString()?.bytes else {
+//          return nil
+//      }
+      let signBytes = signature.bytes
+      let messageBytes = message.bytes
+      
+      let context = secp256k1_context_create(UInt32(SECP256K1_CONTEXT_SIGN | SECP256K1_CONTEXT_VERIFY))!
+      defer {
+        secp256k1_context_destroy(context)
+      }
+      
+      var sig = secp256k1_ecdsa_recoverable_signature()
+      secp256k1_ecdsa_recoverable_signature_parse_compact(context, &sig, signBytes, recid)
+      
+      var publicKey = secp256k1_pubkey()
+      var result: Int32 = 0
+      result = secp256k1_ecdsa_recover(context, &publicKey, &sig, messageBytes)
+      
+      if result == 0 {
+        return nil
+      }
+      
+      var length = 65
+      var data = Data(count: length)
+      data.withUnsafeMutableBytes { (bytes: UnsafeMutablePointer<UInt8>) in
+        result = secp256k1_ec_pubkey_serialize(context, bytes, &length, &publicKey, UInt32(SECP256K1_EC_UNCOMPRESSED))
+      }
+      
+      if result == 0 {
+        return nil
+      }
+      
+      return data.toHexString()
+    }
+    
 
     /// Verify a key.
     /// - Parameter key: Key in hex format.

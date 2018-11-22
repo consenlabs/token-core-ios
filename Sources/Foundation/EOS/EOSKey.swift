@@ -26,6 +26,10 @@ class EOSKey {
   init(privateKey: [UInt8]) {
     btcKey = BTCKey(privateKey: Data(bytes: privateKey))!
   }
+  
+  init(key: BTCKey) {
+    btcKey = key
+  }
 
   convenience init(wif: String) {
     self.init(privateKey: EOSKey.privateKey(from: wif))
@@ -33,6 +37,14 @@ class EOSKey {
 
   func sign(data: Data) -> Data {
     return btcKey.eosCompactSignature(forHash: data)
+  }
+  
+  
+  public static func ecRecover(data: Data, signature: Data) throws -> String {
+    guard let key = BTCKey.eosEcRecover(signature, forHash: data) else {
+      throw "Not found a workable private key"
+    }
+    return EOSKey(key: key).publicKey
   }
 
   static func privateKey(from wif: String) -> [UInt8] {
