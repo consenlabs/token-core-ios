@@ -66,9 +66,9 @@ extension Encryptor {
     private func blockMode(iv: [UInt8]) -> BlockMode {
       switch mode {
       case .cbc:
-        return .CBC(iv: iv)
+        return CBC(iv: iv)
       default:
-        return .CTR(iv: iv)
+        return CTR(iv: iv)
       }
     }
   }
