@@ -77,7 +77,7 @@ public extension WalletManager {
     return try EOSTransactionSigner(txs: txs, keystore: wallet.keystore, password: password).sign()
   }
   
-  public static func eosEcSign(walletID: String, data: String, publicKey: String?, password: String) throws -> String {
+  public static func eosEcSign(walletID: String, data: String, isHex: Bool, publicKey: String?, password: String) throws -> String {
     guard let wallet = Identity.currentIdentity?.findWalletByWalletID(walletID) else {
       throw GenericError.walletNotFound
     }
@@ -93,15 +93,15 @@ public extension WalletManager {
       throw "Only EOS wallet can invoke the eosEcSign"
     }
     
-    guard let hashedData = data.tk_data()?.sha256() else {
+    guard let hashedData = (isHex ? data.tk_dataFromHexString(): data.data(using: .utf8)?.sha256()) else {
       throw "Data shoud be string or hex"
     }
     
     return EOSTransaction.signatureBase58(data: eosKey.sign(data: hashedData))
   }
   
-  public static func eosEcRecover(data: String, signature: String) throws -> String {
-    guard let hashedData = data.tk_data()?.sha256() else {
+  public static func eosEcRecover(data: String, isHex: Bool, signature: String) throws -> String {
+    guard let hashedData = (isHex ? data.tk_dataFromHexString(): data.data(using: .utf8)?.sha256()) else {
       throw "Data shoud be string or hex"
     }
     

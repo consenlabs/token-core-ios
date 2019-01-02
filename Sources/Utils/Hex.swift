@@ -55,6 +55,10 @@ public final class Hex {
       return isHex(string.tk_substring(from: 2))
     }
 
+    if string.count % 2 != 0 {
+      return false
+    }
+    
     let regex = "^[A-Fa-f0-9]+$"
     let predicate = NSPredicate(format: "SELF MATCHES %@", regex)
     return predicate.evaluate(with: string)
