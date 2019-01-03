@@ -79,7 +79,7 @@ public final class Hex {
 }
 
 public extension String {
-  func tk_toHexString() -> String {
+  public func tk_toHexString() -> String {
     return data(using: .utf8)!.tk_toHexString()
   }
 
