@@ -282,7 +282,7 @@ extension Identity {
 
   func findWalletByAddress(_ address: String, on chainType: ChainType) -> BasicWallet? {
     return keystore.wallets.first { (wallet) -> Bool in
-      return wallet.address == address && wallet.imTokenMeta.chain == chainType
+      return wallet.address.removePrefix0xIfNeeded() == address.removePrefix0xIfNeeded() && wallet.imTokenMeta.chain == chainType
     }
   }
 
