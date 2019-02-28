@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import CoreBitcoin
+import TokenCoreDep
 
 public struct WalletManager {
   public static func importFromMnemonic(_ mnemonic: String, metadata: WalletMeta, encryptBy password: String, at path: String) throws -> BasicWallet {
@@ -150,12 +150,27 @@ public struct WalletManager {
     guard let toAddress = BTCAddress(string: to) else {
       throw AddressError.invalid
     }
-
-    let utxos: [UTXO] = try outputs.map { output in
-      guard let utxo = UTXO(raw: output) else {
+    
+    var unspents = [UTXO]()
+    var unspentAmount:Int64 = 0
+    for output in outputs {
+      let utxo: UTXO?
+      // result form api.blockchain.info contains 'tx_hash_big_endian'
+      if output["tx_hash_big_endian"] != nil {
+        utxo = UTXO.parseFormBlockchain(output, isTestNet: isTestnet, isSegWit: segWit.isSegWit)
+      } else {
+        utxo = UTXO(raw: output)
+      }
+      guard let unspent = utxo else {
         throw GenericError.paramError
       }
-      return utxo
+      
+      unspents.append(unspent)
+      unspentAmount += unspent.amount
+      
+      if unspentAmount >= (amount + fee) {
+        break
+      }
     }
 
     let changeKey: BTCKey
@@ -171,16 +186,21 @@ public struct WalletManager {
           throw GenericError.unknownError
       }
       changeKey = key
-      privateKeys = utxos.map { output in
-        let pathWithSlash = "/\(output.derivedPath ?? "")"
-        let key = keychain.key(withPath: pathWithSlash)!
+      privateKeys = unspents.map { output in
+        let key: BTCKey
+        if let derivedPath = output.derivedPath {
+          let pathWithSlash = "/\(derivedPath)"
+          key = keychain.key(withPath: pathWithSlash)!
+        } else {
+          key = BTCMnemonicKeystore.findUtxoKeyByScript(output.scriptPubKey, at: keychain, isSegWit: segWit.isSegWit)!
+        }
         key.isPublicKeyCompressed = true
         return key
       }
     }
 
     let changeAddress = changeKey.address(on: isTestnet ? .testnet : .mainnet, segWit: segWit)
-    let signer = try BTCTransactionSigner(utxos: utxos, keys: privateKeys, amount: amount, fee: fee, toAddress: toAddress, changeAddress: changeAddress)
+    let signer = try BTCTransactionSigner(utxos: unspents, keys: privateKeys, amount: amount, fee: fee, toAddress: toAddress, changeAddress: changeAddress)
 
     if segWit.isSegWit {
       return try signer.signSegWit()
@@ -188,6 +208,7 @@ public struct WalletManager {
       return try signer.sign()
     }
   }
+ 
 
   /// Allow BTC wallet to switch between legacy/SegWit.
   public static func switchBTCWalletMode(walletID: String, password: String, segWit: SegWit) throws -> BasicWallet {

@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import CoreBitcoin
+import TokenCoreDep
 
 public struct BTCMnemonicKeystore: Keystore, EncMnemonicKeystore, XPrvCrypto {
   static let defaultVersion = 44
@@ -70,6 +70,10 @@ public struct BTCMnemonicKeystore: Keystore, EncMnemonicKeystore, XPrvCrypto {
   func getEncryptedXPub() -> String {
     let aes = Encryptor.AES128(key: BTCMnemonicKeystore.commonKey, iv: BTCMnemonicKeystore.commonIv, mode: .cbc, padding: .pkcs5)
     return BTCDataFromHex(aes.encrypt(string: xpub)).base64EncodedString()
+  }
+  
+  public func getDecryptXPub() -> String {
+    return xpub
   }
 
   func calcExternalAddress(at index: Int) -> String {
@@ -163,4 +167,58 @@ extension BTCMnemonicKeystore {
       ]
     }
   }
+}
+
+extension BTCMnemonicKeystore {
+  
+  public static var scriptDerivedPathCache: [String: String] = [String: String]()
+  
+  public static func findUtxoKeyByScript(_ script: String, at keychain: BTCKeychain, isSegWit: Bool) -> BTCKey? {
+    
+    if let derivedPath = scriptDerivedPathCache[script] {
+      return keychain.key(withPath: "/\(derivedPath)")
+    } else {
+      let scriptBytes = Hex.toBytes(script)
+      let targetHash160: Data
+      if isSegWit {
+        // p2pkh script = HASH160(1byte) (1byte dataLength) ab68025513c3dbd2f7b92a94e0581f5d50f654e7(20byte reedmScript hash160) EQUALVERIFY CHECKSIG
+        targetHash160 = Data(bytes: scriptBytes[2...21])
+      } else {
+        // p2sh-p2wpkh script = DUP(1byte) HASH160(1byte) (1byte dataLength) ab68025513c3dbd2f7b92a94e0581f5d50f654e7(20byte pk hash160) EQUALVERIFY CHECKSIG
+        targetHash160 = Data(bytes: scriptBytes[3...22])
+      }
+      
+      var foundKey: BTCKey?
+      for i in 0...65535 {
+        let receiveKey = keychain.key(withPath: "/0/\(i)")!
+        let receiveKeyHash160 = hashPubKey(receiveKey.publicKey! as Data, isSegWit: isSegWit)
+        if (receiveKeyHash160 as Data) == targetHash160 {
+          foundKey = receiveKey
+          scriptDerivedPathCache[script] = "0/\(i)"
+          break
+        }
+        
+        let changeKey = keychain.key(withPath: "/1/\(i)")!
+        let changeKeyHash160 = hashPubKey(changeKey.publicKey! as Data, isSegWit: isSegWit)
+        if (changeKeyHash160 as Data) == targetHash160 {
+          scriptDerivedPathCache[script] = "1/\(i)"
+          foundKey = changeKey
+          break
+        }
+      }
+      return foundKey
+    }
+  }
+  
+  public static func hashPubKey(_ data: Data, isSegWit: Bool) -> Data {
+    let hash160 = BTCHash160(data)!
+    if isSegWit {
+      var redeemScript = "0x0014".tk_dataFromHexString()!
+      redeemScript.append(hash160 as Data)
+      return BTCHash160(redeemScript as Data) as Data
+    } else {
+      return hash160 as Data
+    }
+  }
+
 }

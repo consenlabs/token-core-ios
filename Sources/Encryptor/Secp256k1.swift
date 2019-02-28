@@ -7,7 +7,8 @@
 //
 
 import Foundation
-import libsecp256k1
+import TokenCoreDep.libscrypt
+import secp256k1
 
 extension Encryptor {
   struct SignResult {

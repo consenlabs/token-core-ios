@@ -8,6 +8,14 @@ To install TokenCore, use CocoaPods and add this to your Podfile:
 ```
 pod "TokenCore", git: "https://github.com/consenlabs/token-core-ios.git", branch: "master"
 ```
+
+## Run the Example   
+The example show how to manager the wallet and sign transaction, the eos sign will coming soon.    
+```
+$ cd Example
+$ pod install
+```
+
 ## Try the API
 ### Create new Identity and derive the eth, btc wallets
 ```swift
