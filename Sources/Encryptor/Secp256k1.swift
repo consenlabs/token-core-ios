@@ -25,12 +25,10 @@ extension Encryptor {
     /// - Parameter message: Message in hex format.
     /// - Returns: Signature as a `SignResult`.
     func sign(key: String, message: String) -> SignResult {
-      print("prv key: " + key)
       guard let keyBytes = key.tk_dataFromHexString()?.bytes,
         let messageBytes = message.tk_dataFromHexString()?.bytes else {
           return  Secp256k1.failureSignResult
       }
-      print("messageBytes: " + message)
 
       let context = secp256k1_context_create(UInt32(SECP256K1_CONTEXT_SIGN | SECP256K1_CONTEXT_VERIFY))!
       defer {
