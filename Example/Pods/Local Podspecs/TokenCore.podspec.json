@@ -1,0 +1,40 @@
+{
+  "name": "TokenCore",
+  "version": "0.1",
+  "summary": "Blockchain Library for imToken",
+  "description": "Token Core Library powering imToken iOS app.",
+  "homepage": "https://token.im",
+  "license": {
+    "type": "Apache License, Version 2.0",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "James Chen": "james@ashchan.com"
+  },
+  "platforms": {
+    "ios": "9.0"
+  },
+  "source": {
+    "git": "https://github.com/consenlabs/ios-token-core.git",
+    "tag": "0.1"
+  },
+  "source_files": "Sources/**/*.{h,m,swift}",
+  "swift_version": "4.0",
+  "dependencies": {
+    "CryptoSwift": [
+      "0.9.0"
+    ],
+    "BigInt": [
+      "3.0.0"
+    ],
+    "GRKOpenSSLFramework": [
+
+    ],
+    "TokenCoreDep": [
+
+    ],
+    "secp256k1.swift": [
+
+    ]
+  }
+}

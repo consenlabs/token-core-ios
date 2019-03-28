@@ -137,6 +137,10 @@ public extension BasicWallet {
   func verifyPassword(_ password: String) -> Bool {
     return keystore.verify(password: password)
   }
+  
+  public func derivedKeyBy(_ password: String) -> String {
+    return keystore.crypto.derivedKey(with: password)
+  }
 
   func serializeToMap() -> JSONObject {
     return keystore.serializeToMap()

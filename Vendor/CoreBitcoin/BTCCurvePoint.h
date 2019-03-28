@@ -37,6 +37,12 @@
 // Initializes point with OpenSSL EC_POINT.
 - (id) initWithEC_POINT:(const EC_POINT*)ecpoint;
 
+- (id) initWithHex:(NSString*)hex;
+
+- (id) initWithX:(BTCBigNumber*)x yBit:(NSInteger)yBit;
+- (id) initWithSumOfTwoMultiplies:(BTCBigNumber*)n m:(BTCBigNumber*)m;
+- (instancetype) multiplyTwo:(BTCBigNumber*)j x:(BTCCurvePoint*)x k:(BTCBigNumber*)k;
+
 // These modify the receiver and return self (or nil in case of error). To create another point use -copy: [[point copy] multiply:number]
 - (instancetype) multiply:(BTCBigNumber*)number;
 - (instancetype) add:(BTCCurvePoint*)point;

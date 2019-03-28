@@ -33,7 +33,7 @@ public class Crypto {
   let kdfparams: Kdfparams // KDF-dependent static and dynamic parameters to the KDF function
   let mac: String // SHA3 (keccak-256) of the concatenation of the last 16 bytes of the derived key together with the full ciphertext
 
-  private var cachedDerivedKey = CachedDerivedKey(hashedPassword: "", derivedKey: "")
+  public var cachedDerivedKey = CachedDerivedKey(hashedPassword: "", derivedKey: "")
 
   /**
    Create an Crypto instance.
@@ -101,17 +101,17 @@ public class Crypto {
 }
 
 // MARK: Cache derivedKey
-private extension Crypto {
-  struct CachedDerivedKey {
+public extension Crypto {
+  public struct CachedDerivedKey {
     var hashedPassword: String
     var derivedKey: String
 
-    mutating func cache(password: String, derivedKey: String) {
+    public mutating func cache(password: String, derivedKey: String) {
       hashedPassword = hash(password: password)
       self.derivedKey = derivedKey
     }
 
-    mutating func clear() {
+    public mutating func clear() {
       hashedPassword = ""
       derivedKey = ""
     }
@@ -133,7 +133,11 @@ private extension Crypto {
 extension Crypto {
   // Derive key with password
   func derivedKey(with password: String) -> String {
-    return kdfparams.derivedKey(for: password)
+    if let cached = cachedDerivedKey.fetch(password: password) {
+      return cached
+    } else {
+      return kdfparams.derivedKey(for: password)
+    }
   }
 
   func cachedDerivedKey(with password: String) -> String {

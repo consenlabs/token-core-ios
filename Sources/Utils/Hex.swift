@@ -55,6 +55,10 @@ public final class Hex {
       return isHex(string.tk_substring(from: 2))
     }
 
+    if string.count % 2 != 0 {
+      return false
+    }
+    
     let regex = "^[A-Fa-f0-9]+$"
     let predicate = NSPredicate(format: "SELF MATCHES %@", regex)
     return predicate.evaluate(with: string)
@@ -75,7 +79,7 @@ public final class Hex {
 }
 
 public extension String {
-  func tk_toHexString() -> String {
+  public func tk_toHexString() -> String {
     return data(using: .utf8)!.tk_toHexString()
   }
 
@@ -125,5 +129,15 @@ public extension String {
 
   func tk_isHex() -> Bool {
     return Hex.isHex(self)
+  }
+  
+  func tk_data() -> Data? {
+    var dataBytes: Data?
+    if self.tk_isHex() {
+      dataBytes = self.tk_dataFromHexString()
+    } else {
+      dataBytes = self.data(using: .utf8)
+    }
+    return dataBytes
   }
 }

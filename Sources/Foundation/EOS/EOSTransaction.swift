@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import CoreBitcoin
+import TokenCoreDep
 
 public final class EOSTransaction {
   private let data: String // Hex tx data
@@ -57,5 +57,18 @@ public final class EOSTransaction {
     ret.append(Data(bytes: checksum))
 
     return "SIG_K1_\(BTCBase58StringWithData(ret as Data)!)"
+  }
+  
+  static func deserializeSignature(sig: String) throws -> Data {
+    guard sig.starts(with: "SIG_K1_") else {
+      throw "Signature must begin with SIG_K1_"
+    }
+    let base58Str = sig.tk_substring(from: "SIG_K1_".count)
+    let decodedData = BTCDataFromBase58(base58Str)! as Data
+    let rsvData = Data(bytes: decodedData.bytes[0..<65])
+    if EOSTransaction.signatureBase58(data: rsvData) != sig {
+      throw "The Checksum of eos signature is invalid"
+    }
+    return rsvData
   }
 }

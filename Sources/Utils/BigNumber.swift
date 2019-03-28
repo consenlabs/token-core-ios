@@ -30,6 +30,10 @@ public struct BigNumber {
         }
         return bytes
     }
+  
+    public func hexString() -> String {
+      return Hex.hex(from: serialize())
+    }
 
     public var description: String {
         return value.description
@@ -45,7 +49,7 @@ public struct BigNumber {
     ///     For example if 0x5208 is passed in as '5208', it will be wrongly parsed as decimal 5208.
     ///
     /// If padding is true, 0x00 is padded to left to keep bytes length as input prefixed with 0s.
-    public static func parse(_ text: String, padding: Bool = false) -> BigNumber {
+  public static func parse(_ text: String, padding: Bool = false, paddingLen: Int = -1) -> BigNumber {
         var padding = padding
         var value: BigUInt
         var bytesLen: Int = 0
@@ -74,6 +78,8 @@ public struct BigNumber {
                 value = BigUInt(0)
             }
         }
+    
+        bytesLen = paddingLen != -1 ? paddingLen : bytesLen
 
         return BigNumber(value: value, padding: padding, bytesLength: bytesLen)
     }

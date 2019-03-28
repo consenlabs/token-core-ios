@@ -82,3 +82,9 @@ public enum IdentityError: String, AppError {
   case unsupportEncryptionDataVersion = "unsupport_encryption_data_version"
   case invalidEncryptionDataSignature = "invalid_encryption_data_signature"
 }
+
+extension String : AppError {
+  public var message: String {
+    return self
+  }
+}

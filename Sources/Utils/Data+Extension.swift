@@ -10,7 +10,7 @@ import Foundation
 import CryptoSwift
 
 extension Data {
-  func tk_toHexString() -> String {
+  public func tk_toHexString() -> String {
     return toHexString() // From CryptoSwift
   }
 
@@ -29,7 +29,7 @@ extension Data {
     return bits
   }
 
-  static func tk_random(of length: Int) -> Data {
+  public static func tk_random(of length: Int) -> Data {
     var data = Data(count: length)
     data.withUnsafeMutableBytes { (bytes: UnsafeMutablePointer<UInt8>) -> Void in
       _ = SecRandomCopyBytes(kSecRandomDefault, length, bytes)

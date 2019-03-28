@@ -906,6 +906,24 @@ static int     ECDSA_SIG_recover_key_GFp(EC_KEY *eckey, ECDSA_SIG *ecsig, const 
   return sigdata;
 }
 
++ (instancetype) eosEcRecover:(NSData *)signature forHash:(NSData *)hash {
+  BTCKey *key = [[BTCKey alloc] initWithNewKeyPair:NO];
+  ECDSA_SIG *sig = ECDSA_SIG_new();
+  int recId = (int)[signature subdataWithRange:NSMakeRange(0, 1)];
+  BTCBigNumber *r = [[BTCMutableBigNumber alloc] initWithUnsignedBigEndian:[signature subdataWithRange:NSMakeRange(1, 32)]];
+  BTCBigNumber *s = [[BTCMutableBigNumber alloc] initWithUnsignedBigEndian:[signature subdataWithRange:NSMakeRange(33, 32)]];
+  
+  sig->r = r.BIGNUM;
+  sig->s = s.BIGNUM;
+  recId = (recId - 27) & 3;
+  for (int i=0; i< recId; i++) {
+    if (ECDSA_SIG_recover_key_GFp(key->_key, sig, hash.bytes, (int)hash.length, i, 1)) {
+      return key;
+    }
+  }
+  return nil;
+}
+
 // Verifies digest against given compact signature. On success returns a public key.
 // Reconstruct public key from a compact signature
 // This is only slightly more CPU intensive than just verifying it.

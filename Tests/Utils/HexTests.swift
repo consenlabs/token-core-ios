@@ -46,6 +46,8 @@ class HexTests: XCTestCase {
     XCTAssertFalse(Hex.isHex("imToken"))
     XCTAssertFalse("hijk".tk_isHex())
     XCTAssertFalse("imToken".tk_isHex())
+    XCTAssertFalse("12345".tk_isHex())
+    XCTAssert("123456".tk_isHex())
   }
 
   func testPrefix() {
