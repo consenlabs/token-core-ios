@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import TokenCoreDep.libscrypt
+import CoreBitcoin.libscrypt
 import secp256k1
 
 extension Encryptor {

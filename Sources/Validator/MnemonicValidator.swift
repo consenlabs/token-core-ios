@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import TokenCoreDep
+import CoreBitcoin
 
 public class MnemonicValidator: Validator {
   public typealias Result = String

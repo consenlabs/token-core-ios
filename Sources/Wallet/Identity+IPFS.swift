@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import TokenCoreDep
+import CoreBitcoin
 
 // Encrypt data
 public extension Identity {

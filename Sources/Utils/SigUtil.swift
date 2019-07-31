@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import TokenCoreDep
+import CoreBitcoin
 
 public typealias ECSignature = [String: Any] // -> { v: integer, r: string, s: string }
 

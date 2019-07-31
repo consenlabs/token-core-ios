@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import TokenCoreDep
+import CoreBitcoin
 
 public final class Identity {
   private static var _currentIdentity: Identity?

@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import TokenCoreDep
+import CoreBitcoin
 
 // Legacy keystore format pre-mainnet launch.
 struct EOSLegacyKeystore: Keystore, WIFCrypto {

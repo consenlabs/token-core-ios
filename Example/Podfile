@@ -8,7 +8,7 @@ target 'TokenCore_Example' do
   pod 'PureLayout'
   pod 'MBProgressHUD', '~> 1.1.0'
   pod 'Alamofire', '~> 5.0.0-beta.2'
-  pod "TokenCoreDep", :path => '../../token-core-ios-dep'
+  pod "CoreBitcoin", git: "https://github.com/consenlabs/token-core-ios-dep.git"
 
 #  pod "TokenCore", git: "https://github.com/consenlabs/token-core-ios.git"
 end

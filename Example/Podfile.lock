@@ -2,6 +2,8 @@ PODS:
   - Alamofire (5.0.0-beta.2)
   - BigInt (3.0.0):
     - SipHash (~> 1.2)
+  - CoreBitcoin (0.0.1):
+    - GRKOpenSSLFramework
   - CryptoSwift (0.9.0)
   - GRKOpenSSLFramework (1.0.2.14.1)
   - MBProgressHUD (1.1.0)
@@ -10,19 +12,17 @@ PODS:
   - SipHash (1.2.2)
   - TokenCore (0.1):
     - BigInt (= 3.0.0)
+    - CoreBitcoin
     - CryptoSwift (= 0.9.0)
     - GRKOpenSSLFramework
     - secp256k1.swift
-    - TokenCoreDep
-  - TokenCoreDep (0.0.1):
-    - GRKOpenSSLFramework
 
 DEPENDENCIES:
   - Alamofire (~> 5.0.0-beta.2)
+  - CoreBitcoin (from `https://github.com/consenlabs/token-core-ios-dep.git`)
   - MBProgressHUD (~> 1.1.0)
   - PureLayout
   - TokenCore (from `../`)
-  - TokenCoreDep (from `../../token-core-ios-dep`)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -36,23 +36,28 @@ SPEC REPOS:
     - SipHash
 
 EXTERNAL SOURCES:
+  CoreBitcoin:
+    :git: https://github.com/consenlabs/token-core-ios-dep.git
   TokenCore:
     :path: "../"
-  TokenCoreDep:
-    :path: "../../token-core-ios-dep"
+
+CHECKOUT OPTIONS:
+  CoreBitcoin:
+    :commit: 48fd18897c7b067b073127ebefd1fbd756fcb66a
+    :git: https://github.com/consenlabs/token-core-ios-dep.git
 
 SPEC CHECKSUMS:
   Alamofire: d1e5493588babe3e7b56ae29e8032942f4de09fe
   BigInt: a7864bcecd2976bced91963baef90079dbdcca25
+  CoreBitcoin: 23bfc2e0c45106c5a39b240a6ce8f56c3b084ebf
   CryptoSwift: bca8c5b653dcc2d9734409242a070ff53bafac86
   GRKOpenSSLFramework: 845532a41bd75c6f5b99c9d95b25858357268a78
   MBProgressHUD: e7baa36a220447d8aeb12769bf0585582f3866d9
   PureLayout: f08c01b8dec00bb14a1fefa3de4c7d9c265df85e
   secp256k1.swift: a7e7a214f6db6ce5db32cc6b2b45e5c4dd633634
   SipHash: fad90a4683e420c52ef28063063dbbce248ea6d4
-  TokenCore: 0bf52327492adfbb37eea83b8905fbb6474ae5ec
-  TokenCoreDep: 2c0362294514051fa74b344cd2877152b2d27b3c
+  TokenCore: 4b00a181262f6559735bcac1b32af7c9af038002
 
-PODFILE CHECKSUM: 3c058d0c9cfa60e981b69081981cadd66d56f8d6
+PODFILE CHECKSUM: da7a780239c061776cc84de188d57a2a8abfdb12
 
-COCOAPODS: 1.5.3
+COCOAPODS: 1.6.1

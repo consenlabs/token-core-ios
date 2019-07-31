@@ -30,7 +30,7 @@
     "GRKOpenSSLFramework": [
 
     ],
-    "TokenCoreDep": [
+    "CoreBitcoin": [
 
     ],
     "secp256k1.swift": [

@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import TokenCoreDep
+import CoreBitcoin
 
 struct EOSKeystore: Keystore, EncMnemonicKeystore {
   static let defaultVersion = 10001

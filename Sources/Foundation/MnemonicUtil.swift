@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import TokenCoreDep
+import CoreBitcoin
 
 struct MnemonicUtil {
   static func btcMnemonicFromEngWords(_ words: String) -> BTCMnemonic {

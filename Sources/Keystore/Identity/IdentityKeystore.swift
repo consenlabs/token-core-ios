@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import TokenCoreDep
+import CoreBitcoin
 
 public struct IdentityKeystore {
   static let defaultVersion = 10000
