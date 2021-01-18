@@ -36,7 +36,8 @@ class FuncListController: UITableViewController {
     ]
   ]
   
-  var nonce:Int = 1000
+    var nonce:Int = 0
+    var ethGasPrice = "20"
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -209,10 +210,16 @@ class FuncListController: UITableViewController {
   
   func transferEth() {
     do {
-      let ethWallet = try WalletManager.findWalletByAddress("6031564e7b2f5cc33737807b2e58daff870b590b", on: .eth)
-      // chainID 41:kovan 0 testnet, 1 mainnet
-      nonce += 1
-      let signedResult = try WalletManager.ethSignTransaction(walletID: ethWallet.walletID, nonce: String(nonce), gasPrice: "20", gasLimit: "21000", to: "0xEAC1a91E4E847c92161bF6DFFba23e8499d46A3e", value: "1000000000000000", data: "", password: Constants.password, chainID: 41)
+        let fromAddress = "6031564e7b2f5cc33737807b2e58daff870b590b"
+        let toAddress = "0xEAC1a91E4E847c92161bF6DFFba23e8499d46A3e"
+        //get nonce from api
+        getEthTxNonce(address: fromAddress)
+        //get gasPrice from api
+        getEthGasPrice()
+        
+      let ethWallet = try WalletManager.findWalletByAddress(fromAddress, on: .eth)
+      // chainID 42:kovan 0 testnet, 1 mainnet
+      let signedResult = try WalletManager.ethSignTransaction(walletID: ethWallet.walletID, nonce: String(nonce), gasPrice: ethGasPrice, gasLimit: "21000", to: toAddress, value: "1000000000000000", data: "", password: Constants.password, chainID: 42)
       // https://faucet.kovan.network/
       let requestUrl = "https://api-kovan.etherscan.io/api?module=proxy&action=eth_sendRawTransaction&hex=\(signedResult.signedTx)&apikey=SJMGV3C6S3CSUQQXC7CTQ72UCM966KD2XZ"
       requestResult = NetworkUtil.get(requestUrl)
@@ -220,6 +227,42 @@ class FuncListController: UITableViewController {
      print(error)
     }
   }
+    
+    func getEthGasPrice() {
+        let semaphore = DispatchSemaphore(value: 0)
+        AF.request("https://api-kovan.etherscan.io/api?module=proxy&action=eth_gasPrice&apikey=SJMGV3C6S3CSUQQXC7CTQ72UCM966KD2XZ").responseJSON {[weak self] (response) in
+            if response.result.isFailure {
+                print("getEthGasPrice failure")
+                semaphore.signal()
+                return
+            }
+            let dic = response.result.value as? [String: Any]
+            var hexiStr = dic!["result"] as! String
+            hexiStr.removeFirst(2)
+            self?.ethGasPrice = String(Int(hexiStr, radix: 16)!)
+            print("gasPrice:\(self!.ethGasPrice)")
+            semaphore.signal()
+        }
+        _ = semaphore.wait(timeout: .now() + 10)
+    }
+    
+    func getEthTxNonce(address: String) {
+        let semaphore = DispatchSemaphore(value: 0)
+        AF.request("https://api-kovan.etherscan.io/api?module=proxy&action=eth_getTransactionCount&address=0x\(address)&tag=latest&apikey=SJMGV3C6S3CSUQQXC7CTQ72UCM966KD2XZ").responseJSON {[weak self] (response) in
+            if response.result.isFailure {
+                print("getEthTxNonce failure")
+                semaphore.signal()
+                return
+            }
+            let dic = response.result.value as? [String: Any]
+            var hexiStr = dic!["result"] as! String
+            hexiStr.removeFirst(2)
+            self?.nonce = Int(hexiStr, radix: 16)!
+            print("nonce:\(self!.nonce)")
+            semaphore.signal()
+        }
+        _ = semaphore.wait(timeout: .now() + 10)
+    }
   
   func transferBTC()  {
     do {
